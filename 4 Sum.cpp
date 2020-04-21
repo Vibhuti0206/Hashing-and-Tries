@@ -1,4 +1,50 @@
 vector<vector<int> > Solution::fourSum(vector<int> &A, int B) {
+    set<vector<int>> result;
+    vector<int> res;
+    unordered_map<int,vector<pair<int,int>>> mp;
+    for(int i=0;i<A.size();i++)
+    {
+        for(int j=i+1;j<A.size();j++)
+        {
+            int tf=B-A[i]-A[j];
+            if(mp.find(tf)!=mp.end())
+            {   for(auto it=mp[tf].begin();it!=mp[tf].end();it++)
+                {if(it->first!=it->second&&it->first!=i&&it->first!=j&&it->second!=i&&it->second!=j&&i!=j)
+                {res.push_back(A[it->first]);
+                res.push_back(A[(it->second)]);
+                res.push_back(A[i]);
+                res.push_back(A[j]);
+                sort(res.begin(),res.end());
+                result.insert(res);
+                res.clear();}
+                    
+                }
+                
+            }
+             mp[A[i]+A[j]].push_back(make_pair(i,j));
+               
+            
+        }
+    }
+    vector<vector<int>> nrs;
+    for(auto i:result)
+    {
+        nrs.push_back(i);
+    }
+    return nrs;
+}
+
+
+
+
+
+
+OR/////
+
+
+
+
+vector<vector<int> > Solution::fourSum(vector<int> &A, int B) {
     vector<vector<int>> res;
     vector<int> v;
     int n = A.size();
